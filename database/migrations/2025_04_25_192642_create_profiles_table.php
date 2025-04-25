@@ -16,6 +16,16 @@ return new class extends Migration
             $table->string('title');
             $table->string('biography');
             $table->string('website');
+            
+            //creamos el campo para albergar la llave foranea
+            $table->unsignedBigInteger('user_id')->unique();
+            //asociamos el user_id al id de la tabla user
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')//el otro estado es SET_NULL
+                ->onUpdate('cascade');
+            
             $table->timestamps();
         });
     }
