@@ -2,16 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClaseController;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RoleController;
 
 
-Route::get('saludarficha',[ClaseController::class,'saludo']);
+Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
+Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
+Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
 
-Route::get('numeropordos/{numero1}',[ClaseController::class,'pordos']);
-
-Route::get('suma/{numero1}/{numero2}',[ClaseController::class,'suma']);
-
-
+Route::get('roles', [RoleController::class, 'index'])->name('role.index');
+Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
+Route::post('role/store', [RoleController::class, 'store'])->name('role.store');
