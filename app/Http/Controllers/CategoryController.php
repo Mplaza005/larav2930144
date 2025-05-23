@@ -11,8 +11,8 @@ class CategoryController extends Controller
      public function index()
     {
         $categories = Category::all();
-        $users = User::all();
-        return view('category.index', compact('categories','users'));
+       
+        return view('category.index', compact('categories'));
     }
  
      public function create()
@@ -32,4 +32,38 @@ class CategoryController extends Controller
 
 
     }
+
+
+    public function show($id)
+    {
+        $category = Category::find($id);
+       
+        return view('category.show', compact('category'));
+    }
+
+     //Destroy
+     public function destroy (Category $category){
+        
+        $category->delete();
+
+        return redirect()->route('category.index');
+    }
+
+      public function edit(Category $category){
+
+        return view('category.edit',compact('category'));
+
+      }
+
+     //Update
+    public function update(Request $request, Category $category){
+
+        $category->name = $request->name;
+        $category->save();
+    
+        return redirect()->route('category.index');
+
+      }
+
+
 }

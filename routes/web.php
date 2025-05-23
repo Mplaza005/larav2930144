@@ -6,9 +6,15 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RoleController;
 
 
+
 Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
 Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
 Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
+Route::get('categories/{category}', [CategoryController::class, 'show'])->name('category.show');
+Route::put('category/{category}',[CategoryController::class,'update'])->name('category.update');
+Route::delete('category/{category}',[CategoryController::class,'destroy'])->name('category.destroy');
+Route::get('curso/{category}/editar',[CategoryController::class,'edit'])->name('category.edit');
+
 
 Route::get('roles', [RoleController::class, 'index'])->name('role.index');
 Route::get('role/create', [RoleController::class, 'create'])->name('role.create');
