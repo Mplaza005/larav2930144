@@ -27,10 +27,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
 
-        $category = new Category();
-        $category->name = $request->name;
-        $category->save();
+       
+        $post = Post::create($request->all());
 
-        return redirect()->route('category.index');
+
+        return  $post;
     }
 }

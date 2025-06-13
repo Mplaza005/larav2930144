@@ -7,15 +7,15 @@ use App\Models\Category;
 use App\Models\User;
 
 class CategoryController extends Controller
-{  
-     public function index()
+{
+    public function index()
     {
         $categories = Category::all();
-       
+
         return view('category.index', compact('categories'));
     }
- 
-     public function create()
+
+    public function create()
     {
         return view('category.create');
     }
@@ -26,44 +26,48 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
+        //ADJUNTAR EL PDF
+        $file = $request->file("urlPdf");
+        $nombreArchivo = "pdf_" . time() . "." . $file->guessExtension();
+        //guardado del archivo
+        $request->file('urlPdf')->storeAs('imagenes', $nombreArchivo, 'public');
+        $category->urlPdf = $nombreArchivo;
+
         $category->save();
 
         return redirect()->route('category.index');
-
-
     }
 
 
     public function show($id)
     {
         $category = Category::find($id);
-       
+
         return view('category.show', compact('category'));
     }
 
-     //Destroy
-     public function destroy (Category $category){
-        
+    //Destroy
+    public function destroy(Category $category)
+    {
+
         $category->delete();
 
         return redirect()->route('category.index');
     }
 
-      public function edit(Category $category){
+    public function edit(Category $category)
+    {
 
-        return view('category.edit',compact('category'));
+        return view('category.edit', compact('category'));
+    }
 
-      }
-
-     //Update
-    public function update(Request $request, Category $category){
+    //Update
+    public function update(Request $request, Category $category)
+    {
 
         $category->name = $request->name;
         $category->save();
-    
+
         return redirect()->route('category.index');
-
-      }
-
-
+    }
 }

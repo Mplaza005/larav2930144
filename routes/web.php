@@ -8,13 +8,16 @@ use App\Http\Controllers\PostController;
 
 
 
-Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
-Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
-Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
-Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
-Route::put('category/{category}',[CategoryController::class,'update'])->name('category.update');
-Route::delete('category/{category}',[CategoryController::class,'destroy'])->name('category.destroy');
-Route::get('categorycurso/{category}/editar',[CategoryController::class,'edit'])->name('category.edit');
+// Route::get('categories', [CategoryController::class, 'index'])->name('category.index');
+// Route::get('category/create', [CategoryController::class, 'create'])->name('category.create');
+// Route::post('category/store', [CategoryController::class, 'store'])->name('category.store');
+// Route::get('category/{category}', [CategoryController::class, 'show'])->name('category.show');
+// Route::put('category/{category}',[CategoryController::class,'update'])->name('category.update');
+// Route::delete('category/{category}',[CategoryController::class,'destroy'])->name('category.destroy');
+// Route::get('categorycurso/{category}/editar',[CategoryController::class,'edit'])->name('category.edit');
+
+Route::resource('category',CategoryController::class);
+
 
 
 Route::get('posts', [PostController::class, 'index'])->name('post.index');
